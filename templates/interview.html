@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Interview Session</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:
+radial-gradient(circle at top left,#2563eb33,transparent 40%),
+radial-gradient(circle at bottom right,#7c3aed33,transparent 40%),
+linear-gradient(135deg,#0f172a,#111827,#1e293b);
+min-height:100vh;
+color:white;
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#60a5fa;
+}
+
+.timer{
+background:#ef4444;
+padding:10px 18px;
+border-radius:10px;
+font-weight:bold;
+}
+
+.container{
+width:90%;
+max-width:1300px;
+margin:40px auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+border-radius:20px;
+padding:25px;
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.card h2{
+color:#60a5fa;
+margin-bottom:15px;
+}
+
+video{
+width:100%;
+height:420px;
+object-fit:cover;
+border-radius:15px;
+background:black;
+}
+
+.question-box{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:12px;
+margin-top:15px;
+font-size:20px;
+line-height:1.8;
+border-left:4px solid #3b82f6;
+}
+
+textarea{
+width:100%;
+height:180px;
+margin-top:20px;
+padding:15px;
+border:none;
+border-radius:12px;
+resize:none;
+background:rgba(255,255,255,0.08);
+color:white;
+font-size:15px;
+}
+
+textarea:focus{
+outline:none;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+font-weight:600;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.status{
+margin-top:15px;
+color:#22c55e;
+font-weight:600;
+}
+
+.warning{
+margin-top:15px;
+padding:12px;
+border-radius:10px;
+background:rgba(234,179,8,0.15);
+color:#facc15;
+}
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+video{
+height:280px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="navbar">
+
+<div class="logo">
+🎤 AI Interview Analyzer
+</div>
+
+<div class="timer">
+⏱ <span id="time">60</span>s
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- Camera -->
+
+<div class="card">
+
+<h2>📷 Live Interview Camera</h2>
+
+<video id="camera" autoplay muted playsinline></video>
+
+<div class="status">
+✅ Camera & Microphone Connected
+</div>
+
+<div class="warning">
+⚠ Maintain eye contact, sit straight and speak confidently.
+</div>
+
+</div>
+
+<!-- Interview -->
+
+<div class="card">
+
+<h2>🎯 {{ category.upper() }} Interview</h2>
+
+<div class="question-box" id="question">
+{{ question }}
+</div>
+
+<form action="/next_question" method="POST">
+
+<textarea
+name="answer"
+placeholder="Type your answer here..."
+required></textarea>
+
+<button type="submit">
+Submit Answer
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Camera + Mic
+
+navigator.mediaDevices.getUserMedia({
+video:true,
+audio:true
+})
+.then(function(stream){
+
+document.getElementById("camera").srcObject = stream;
+
+})
+.catch(function(){
+
+alert("Please allow Camera and Microphone.");
+
+});
+
+// Timer
+
+let timeLeft = 60;
+
+const timer = document.getElementById("time");
+
+const countdown = setInterval(function(){
+
+timeLeft--;
+
+timer.innerHTML = timeLeft;
+
+if(timeLeft <= 0){
+
+clearInterval(countdown);
+
+alert("Time Up!");
+
+}
+
+},1000);
+
+
+// Speak Question
+
+window.onload = function(){
+
+let text =
+document.getElementById("question").innerText;
+
+let speech =
+new SpeechSynthesisUtterance(text);
+
+speech.lang = "en-US";
+speech.rate = 1;
+
+speechSynthesis.speak(speech);
+
+};
+
+</script>
+
+</body>
+</html>

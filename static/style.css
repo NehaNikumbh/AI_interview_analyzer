@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: white;
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    margin-top: 90px;
+    font-size: 44px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Subtitle */
+p {
+    font-size: 18px;
+    opacity: 0.85;
+    margin-top: 10px;
+}
+
+/* Button style */
+.btn {
+    padding: 12px 28px;
+    margin: 15px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+
+/* Login button */
+.login {
+    background: #00c6ff;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+}
+
+/* Register button */
+.register {
+    background: #00ff9d;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
+/* Hover effect */
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Form inputs */
+input, textarea {
+    padding: 12px;
+    width: 280px;
+    border-radius: 10px;
+    border: none;
+    margin: 8px;
+    outline: none;
+}
+
+/* Card feel for forms */
+form {
+    margin-top: 25px;
+}
